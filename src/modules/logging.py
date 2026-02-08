@@ -12,3 +12,22 @@ class powermonkeyLogger:
 
     def warning(self, message):
         print(f'[WRN] {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} {message}')
+
+    def break_line(self):
+        print('\n')
+
+    def scoring(self, score):
+        print(f'---> SCORE: {score}')
+        print('Compare your system with others at: https://github.com/zlElo/Powermonkey')
+
+    def result(self):
+        print("""
+        /$$$$$$$  /$$$$$$$$  /$$$$$$  /$$   /$$ /$$    /$$$$$$$$ 
+        | $$__  $$| $$_____/ /$$__  $$| $$  | $$| $$   |__  $$__/
+        | $$  \ $$| $$      | $$  \__/| $$  | $$| $$      | $$  
+        | $$$$$$$/| $$$$$   |  $$$$$$ | $$  | $$| $$      | $$ 
+        | $$__  $$| $$__/    \____  $$| $$  | $$| $$      | $$  
+        | $$  \ $$| $$       /$$  \ $$| $$  | $$| $$      | $$  
+        | $$  | $$| $$$$$$$$|  $$$$$$/|  $$$$$$/| $$$$$$$$| $$  
+        |__/  |__/|________/ \______/  \______/ |________/|__/  
+        """)

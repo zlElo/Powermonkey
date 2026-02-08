@@ -25,7 +25,7 @@ def test_disk(logger):
     # collect results
     duration = end_time - start_time
     speed = size / duration / (1024 * 1024) # MB/s
-    score = speed/30 # calculate score based on speed
+    score = speed/10 # calculate score based on speed
     logger.log(f'DONE. Wrote test file in {duration:.2f} seconds at {speed:.2f} MB/s')
 
     # cleanup
