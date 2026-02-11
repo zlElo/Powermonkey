@@ -9,9 +9,14 @@ logger = powermonkeyLogger('main')
 if __name__ == '__main__':
     # start tests
     logger.log('Starting tests...')
+    category = 'a1-crg'
     score_disk = test_disk(logger)
     score_cpu = test_cpu(logger)
     score_gpu = test_gpu(logger)
+
+    if score_gpu is None:
+        category = 'a1-cr'
+        score_gpu = 0
 
     logger.break_line()
     logger.result()
@@ -20,7 +25,8 @@ if __name__ == '__main__':
     print('Your system informations')
     print('CPU: ' + get_cpu_name())
     print('System/OS: ' + get_system())
-    print(f'Powermonkey: {open("version.monkey", "r").read().strip()}')
+    print(f'Powermonkey: {open("version.powermonkey", "r").read().strip()}')
+    print(f'Test category: {category}')
     
     logger.break_line()
-    logger.scoring(round(score_disk + score_cpu + score_gpu, 1))
+    logger.scoring(round(score_disk + score_cpu + score_gpu, 1), category)

@@ -16,9 +16,9 @@ class powermonkeyLogger:
     def break_line(self):
         print('\n')
 
-    def scoring(self, score):
+    def scoring(self, score, category):
         print(f'---> SCORE: {score}')
-        print('Compare your system with others at: https://github.com/zlElo/Powermonkey')
+        print(f'Compare your system with others at: https://github.com/zlElo/Powermonkey#{category}')
 
     def result(self):
         print("""
