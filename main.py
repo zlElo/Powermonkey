@@ -1,6 +1,7 @@
 from src.modules.logging import powermonkeyLogger
 from src.disk import test_disk
 from src.cpu import test_cpu
+from src.systemcheck import *
 
 logger = powermonkeyLogger('main')
 
@@ -12,4 +13,12 @@ if __name__ == '__main__':
 
     logger.break_line()
     logger.result()
+    
+    # system informations
+    print('Your system informations')
+    print('CPU: ' + get_cpu_name())
+    print('System/OS: ' + get_system())
+    print(f'Powermonkey: {open("version.monkey", "r").read().strip()}')
+    
+    logger.break_line()
     logger.scoring(round(score_disk + score_cpu, 1))
