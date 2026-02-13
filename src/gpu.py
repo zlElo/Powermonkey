@@ -2,35 +2,42 @@ import torch
 import time
 
 def test_gpu(logger):
-    if not torch.cuda.is_available():
-        logger.warning("No CUDA-compatible GPU found. Skipping GPU benchmark.")
-        return
+    # priority: CUDA(NVIDIA/ROCm) > CPU (iGPU-Fallback)
+    if torch.cuda.is_available():
+        device = "cuda"
+        gpu_name = torch.cuda.get_device_name(0)
+        total_mem = torch.cuda.get_device_properties(0).total_memory
+        logger.log(f"Using GPU: {gpu_name}")
+        sync = lambda: torch.cuda.synchronize()
+    else:
+        device = "cpu"
+        total_mem = 4 * 1024**3  # 4GB RAM Fallback
+        logger.log("Using CPU (iGPU not accelerated)")
+        sync = lambda: None
     
-    device = "cuda"
-    print(f"GPU: {torch.cuda.get_device_name()}")
+    # Adjust matrix size
+    size_ = total_mem // (4 * 2)  
+    size = min(int(size_ ** (1/3)), 8000 if device=="cuda" else 2000)  # CPU smaller
     
-    size_ = torch.cuda.get_device_properties(device).total_memory // (4 * 2)  # number of float32 elements that fit in VRAM, divided by 2 for safety
-    size = int(size_ ** (1/3))  # get the cube root to determine the size of the square matrices
     a = torch.randn(size, size, device=device)
     b = torch.randn(size, size, device=device)
     
     # Warmup
-    logger.log("Warming up GPU...")
-    for _ in range(5): torch.matmul(a, b)
-    torch.cuda.synchronize()
+    logger.log("Warming up...")
+    for _ in range(5): 
+        torch.matmul(a, b)
+    sync()
     
     # Benchmark
-    logger.log("Running GPU benchmark...")
+    logger.log("Running benchmark...")
     start = time.time()
-    for _ in range(50): 
+    for _ in range(5000): 
         c = torch.matmul(a, b)
-    torch.cuda.synchronize()
+    sync()
     end = time.time()
     
-    # calculate GFLOPS
-    gflops = 2 * size**3 * 50 / (end - start) / 1e9
-    vram_used = torch.cuda.memory_allocated()
-    score = gflops / 100  # scale down for scoring
-    logger.log(f'GPU benchmark completed, used VRAM: {vram_used} bytes')
+    gflops = 2 * size**3 * 5000 / (end - start) / 1e9
+    score = gflops / 20  # Scale down for scoring
     
-    return round(score, 1)
+    logger.log(f"Score: {round(score, 1)}, GFLOPS achieved: {round(gflops, 1)}")
+    return round(score, 1), device

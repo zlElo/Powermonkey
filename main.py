@@ -12,9 +12,9 @@ if __name__ == '__main__':
     category = 'a1-crg'
     score_disk = test_disk(logger)
     score_cpu = test_cpu(logger)
-    score_gpu = test_gpu(logger)
+    score_gpu, device = test_gpu(logger)
 
-    if score_gpu is None:
+    if device == "cpu":
         category = 'a1-cr'
         score_gpu = 0
 
