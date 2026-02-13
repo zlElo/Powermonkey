@@ -1,6 +1,10 @@
 import torch
 import time
 
+def _no_op_sync():
+    """No-op synchronization for CPU fallback"""
+    pass
+
 def test_gpu(logger):
     # priority: CUDA(NVIDIA/ROCm) > CPU (iGPU-Fallback)
     if torch.cuda.is_available():
@@ -13,7 +17,7 @@ def test_gpu(logger):
         device = "cpu"
         total_mem = 4 * 1024**3  # 4GB RAM Fallback
         logger.log("Using CPU (iGPU not accelerated)")
-        sync = lambda: None
+        sync = _no_op_sync
     
     # Adjust matrix size
     size_ = total_mem // (4 * 2)  

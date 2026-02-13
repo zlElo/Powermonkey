@@ -21,7 +21,7 @@ class powermonkeyLogger:
         print(f'Compare your system with others at: https://github.com/zlElo/Powermonkey#{category}')
 
     def result(self):
-        print("""
+        print(r"""
         /$$$$$$$  /$$$$$$$$  /$$$$$$  /$$   /$$ /$$    /$$$$$$$$ 
         | $$__  $$| $$_____/ /$$__  $$| $$  | $$| $$   |__  $$__/
         | $$  \ $$| $$      | $$  \__/| $$  | $$| $$      | $$  

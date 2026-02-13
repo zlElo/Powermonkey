@@ -26,7 +26,8 @@ def prime_worker(start, end):
 
 def prime_cruncher(n=100000000, logger=None):
     cores = mp.cpu_count()
-    logger.log(f'Using {cores} CPU cores for prime crunching...')
+    if logger:
+        logger.log(f'Using {cores} CPU cores for prime crunching...')
     chunk_size = n // cores
     
     ranges = [(i * chunk_size, (i + 1) * chunk_size) for i in range(cores)]
