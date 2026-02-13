@@ -1,5 +1,6 @@
 from src.modules.logging import powermonkeyLogger
 from src.modules.table import generate_ascii_table
+from src.modules.coloring import bcolors
 from src.disk import test_disk
 from src.cpu import test_cpu
 from src.gpu import test_gpu
@@ -36,7 +37,7 @@ if __name__ == '__main__':
     logger.break_line()
     
     # system informations
-    print('== Your system informations ==')
+    print(bcolors.OKCYAN + '== Your system informations ==' + bcolors.ENDC)
     print('CPU: ' + get_cpu_name())
     print('GPU: ' + get_gpu_name())
     print('System/OS: ' + get_system())

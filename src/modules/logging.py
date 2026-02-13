@@ -1,4 +1,5 @@
 import datetime
+from src.modules.coloring import bcolors
 
 class powermonkeyLogger:
     def __init__(self, name):
@@ -17,7 +18,7 @@ class powermonkeyLogger:
         print('\n')
 
     def scoring(self, score, category):
-        print(f'---> SCORE: {score}')
+        print(bcolors.OKGREEN + f'---> SCORE: {score}' + bcolors.ENDC)
         print(f'Compare your system with others at: https://github.com/zlElo/Powermonkey#{category}')
 
     def result(self):
