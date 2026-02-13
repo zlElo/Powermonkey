@@ -26,6 +26,7 @@ if __name__ == '__main__':
     print('CPU: ' + get_cpu_name())
     print('GPU: ' + get_gpu_name())
     print('System/OS: ' + get_system())
+    print('Python version: ' + get_python_version())
     print(f'Powermonkey: {open("version.powermonkey", "r").read().strip()}')
     print(f'Test category: {category}')
     

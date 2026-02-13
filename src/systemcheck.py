@@ -53,3 +53,6 @@ def get_gpu_name():
     if torch.cuda.is_available():
         return torch.cuda.get_device_name()
     return "No CUDA-compatible GPU found"
+
+def get_python_version():
+    return platform.python_version()
