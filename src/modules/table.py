@@ -6,7 +6,8 @@ def generate_ascii_table(headers, rows):
     col_widths = [len(str(header)) for header in headers]
     for row in rows:
         for i, cell in enumerate(row):
-            col_widths[i] = max(col_widths[i], len(str(cell)))
+            if i < len(col_widths):  # Only process if column exists in headers
+                col_widths[i] = max(col_widths[i], len(str(cell)))
     
     # Create separator line
     separator = "+" + "+".join(["-" * (width + 2) for width in col_widths]) + "+"
@@ -24,7 +25,9 @@ def generate_ascii_table(headers, rows):
     # Add rows
     for row in rows:
         row_line = "|"
-        for i, cell in enumerate(row):
+        for i, header in enumerate(headers):
+            # Get cell value or empty string if row doesn't have this column
+            cell = row[i] if i < len(row) else ""
             row_line += f" {str(cell).ljust(col_widths[i])} |"
         table_lines.append(row_line)
     
