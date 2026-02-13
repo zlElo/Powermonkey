@@ -17,7 +17,7 @@
 <h3>Measurements</h3>
 <ul>
   <li>
-    CPU test with a pi approximation and parallel prime crunching algorithm
+    CPU test using a Pi approximation and a parallel prime number calculation algorithm
   </li>
 
   <li>
