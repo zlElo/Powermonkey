@@ -29,7 +29,7 @@ def test_gpu(logger):
     sync()
     
     # Benchmark
-    logger.log("Running benchmark...")
+    logger.log("Running GPU benchmark...")
     start = time.time()
     for _ in range(5000): 
         c = torch.matmul(a, b)
