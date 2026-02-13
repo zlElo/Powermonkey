@@ -1,6 +1,7 @@
 import platform
 import subprocess
 import re
+import torch
 
 def get_cpu_name():
     system = platform.system()
@@ -45,6 +46,10 @@ def get_cpu_name():
     
     return platform.processor() or "Unknown"
 
-
 def get_system():
     return platform.system()
+
+def get_gpu_name():
+    if torch.cuda.is_available():
+        return torch.cuda.get_device_name()
+    return "No CUDA-compatible GPU found"

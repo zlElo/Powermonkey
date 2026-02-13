@@ -9,7 +9,8 @@ def test_gpu(logger):
     device = "cuda"
     print(f"GPU: {torch.cuda.get_device_name()}")
     
-    size = 8192
+    size_ = torch.cuda.get_device_properties(device).total_memory // (4 * 2)  # number of float32 elements that fit in VRAM, divided by 2 for safety
+    size = int(size_ ** (1/3))  # get the cube root to determine the size of the square matrices
     a = torch.randn(size, size, device=device)
     b = torch.randn(size, size, device=device)
     
@@ -29,7 +30,7 @@ def test_gpu(logger):
     # calculate GFLOPS
     gflops = 2 * size**3 * 50 / (end - start) / 1e9
     vram_used = torch.cuda.memory_allocated()
-    score = (gflops / 1000)*vram_used
-    logger.log('GPU benchmark completed')
+    score = gflops / 100  # scale down for scoring
+    logger.log(f'GPU benchmark completed, used VRAM: {vram_used} bytes')
     
     return round(score, 1)
