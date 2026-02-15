@@ -11,9 +11,6 @@
 
 The idea behind Powermonkey was to build a lightweight, open-source benchmark that’s simple, fast, and efficient. I didn’t want to download gigabytes of data just to run a test that measures one aspect of performance at a time. I wanted a straightforward tool that shows how well my system performs — especially in comparison to others.
 
-BTW: Powermonkey uses 3rd party code as little a possible, even the logger is a small self-written class
-
-
 ## Measurements
 - CPU test using a Pi approximation and a parallel prime number calculation algorithm
 - GPU test based on the raw matrix-multiplication performance
@@ -48,9 +45,9 @@ Alternatively you can use the python scripts like descriped below or build an ow
 Powermonkey seperates finished tests in two different categories: ```a1-cdg``` and ```a1-cd```. This function helps to enable fair comparisons between systems.
 
 ### a1-cdg
-a1-cpu-disk-graphicscard
+*a1-cpu-disk-graphicscard*
 > This category describes a result of systems with a cuda compatible graphics card, a cpu and a disk. These systems usually have a high score.
 
 ### a1-cd
-a1-cpu-disk
+*a1-cpu-disk*
 > This category describes a result of systems with an iGPU or an older graphics card with no modern cuda support, a cpu and a disk. These systems usually have a lower score than ```a1-cdg``` test-systems.
