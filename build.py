@@ -7,10 +7,9 @@ from pathlib import Path
 class NuitkaBuilder:
     def __init__(self):
         self.main_file = "main.py"
-        self.version_file = "version.powermonkey"
         self.src_dir = "src"
         self.output_dir = "build"
-        self.required_files = [self.main_file, self.version_file, self.src_dir]
+        self.required_files = [self.main_file, self.src_dir]
         
     def check_prerequisites(self):
         print("Checking prerequisites...")
