@@ -44,8 +44,7 @@ class NuitkaBuilder:
             "--standalone",
             f"--output-dir={self.output_dir}",
             "--follow-imports",
-            f"--include-data-files={self.version_file}={self.version_file}",
-            f"--include-data-dir={self.src_dir}={self.src_dir}",
+            #f"--include-data-dir={self.src_dir}={self.src_dir}",
             "--python-flag=-S",
             #"--nofollow-import-to=torch._dynamo", old torch version
             "--assume-yes-for-downloads",
