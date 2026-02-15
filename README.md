@@ -9,25 +9,42 @@
 
 --------
 
-<p>The idea behind Powermonkey was to build a lightweight, open-source benchmark that’s simple, fast, and efficient. I didn’t want to download gigabytes of data just to run a test that measures one aspect of performance at a time. I wanted a straightforward tool that shows how well my system performs — especially in comparison to others.</p>
+The idea behind Powermonkey was to build a lightweight, open-source benchmark that’s simple, fast, and efficient. I didn’t want to download gigabytes of data just to run a test that measures one aspect of performance at a time. I wanted a straightforward tool that shows how well my system performs — especially in comparison to others.
 
-<p>BTW: Powermonkey uses 3rd party code as little a possible, even the logger is a small self-written class</p>
+BTW: Powermonkey uses 3rd party code as little a possible, even the logger is a small self-written class
 
 
-<h3>Measurements</h3>
-<ul>
-  <li>
-    CPU test using a Pi approximation and a parallel prime number calculation algorithm
-  </li>
+## Measurements
+- CPU test using a Pi approximation and a parallel prime number calculation algorithm
+- GPU test based on the raw matrix-multiplication performance
+- Disk test based on copy speed
 
-  <li>
-    GPU test based on the raw matrix-multiplication performance
-  </li>
-    
-  <li>
-    Disk test based on copy speed
-  </li>
-</ul>
+## Minimum Requirements
+- CPU: 1 core
+- RAM: 4GB
+- Disk: 15GB (free space)
 
-<h3>Installation</h3>
-coming soon...
+## Installation
+To install powermonkey, you can download the executables in the releases. 
+Alternatively you can use the python scripts like descriped below or build an own executable with the given script.
+
+### Script
+1. Clone repo ```git clone https://github.com/zlElo/Powermonkey.git```
+2. Navigate ```cd Powermonkey```
+3. Install requirements ```pip install -r requirements.txt```
+4. run ```python3 main.py```
+
+### Build by source
+1. Clone repo ```git clone https://github.com/zlElo/Powermonkey.git```
+2. Navigate ```cd Powermonkey```
+3. Install requirements ```pip install -r requirements.txt```
+4. Install additional requirements ```pip install -r requirements-advanced.txt```
+5. run script ```python3 build.py```
+6. Setup configuration using "y" for yes and "n" for no
+
+
+
+
+
+
+
