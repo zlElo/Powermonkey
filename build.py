@@ -2,7 +2,6 @@ import os
 import sys
 import shutil
 import subprocess
-from pathlib import Path
 
 class NuitkaBuilder:
     def __init__(self):

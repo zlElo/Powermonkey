@@ -1,10 +1,11 @@
 import os
 import time
 import shutil
+import random
 
 def test_disk(logger):
-    disk = os.statvfs('/')
-    path = f'{disk.f_fsid}disktest'
+    testnumber = random.randint(1000,10000) # use random number to avoid conflicts with other directories
+    path = f'{testnumber}disktest'
     path2 = f'{path}/local'
     os.makedirs(path, exist_ok=True)
     os.makedirs(path2, exist_ok=True)

@@ -22,7 +22,8 @@ BTW: Powermonkey uses 3rd party code as little a possible, even the logger is a 
 ## Minimum Requirements
 - CPU: 1 core
 - RAM: 4GB
-- Disk: 15GB (free space)
+- Disk: 20GB (free space, just temporary for disk test)
+- Python 3, recommended: 3.12
 
 ## Installation
 To install powermonkey, you can download the executables in the releases. 
