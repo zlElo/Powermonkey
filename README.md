@@ -48,7 +48,7 @@ Alternatively you can use the python scripts like descriped below or build an ow
 Powermonkey seperates finished tests in two different categories: ```a1-cdg``` and ```a1-cd```. This function helps to enable fair comparisons between systems.
 
 ### a1-cdg
-This category describes a result of systems with a cuda compatible graphics card, a cpu and a disk. These systems usually have a high score.
+> This category describes a result of systems with a cuda compatible graphics card, a cpu and a disk. These systems usually have a high score.
 
 ### a1-cd
-This category describes a result of systems with an iGPU or an older graphics card with no modern cuda support, a cpu and a disk. These systems usually have a lower score than ```a1-cdg``` test-systems.
+> This category describes a result of systems with an iGPU or an older graphics card with no modern cuda support, a cpu and a disk. These systems usually have a lower score than ```a1-cdg``` test-systems.
