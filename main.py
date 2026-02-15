@@ -1,6 +1,7 @@
 from src.modules.logging import powermonkeyLogger
 from src.modules.table import generate_ascii_table
 from src.modules.coloring import bcolors
+from src.infos import powermonkey_infos
 from src.disk import test_disk
 from src.cpu import test_cpu
 from src.gpu import test_gpu
@@ -8,18 +9,19 @@ from src.systemcheck import *
 
 # init vars
 logger = powermonkeyLogger('main')
+infos = powermonkey_infos()
 headers = ["Test Device", "Score"]
 
 if __name__ == '__main__':
     # start tests
     logger.log('Starting tests...')
-    category = 'a1-crg'
+    category = 'a1-cdg'
     score_disk = test_disk(logger)
     score_cpu = test_cpu(logger)
     score_gpu, device = test_gpu(logger)
 
     if device == "cpu":
-        category = 'a1-cr'
+        category = 'a1-cd'
 
     logger.break_line()
     logger.result()
@@ -42,5 +44,5 @@ if __name__ == '__main__':
     print('GPU: ' + get_gpu_name())
     print('System/OS: ' + get_system())
     print('Python version: ' + get_python_version())
-    print(f'Powermonkey: {open("version.powermonkey", "r").read().strip()}')
+    print(f'Powermonkey: {infos.version}')
     print(f'Test category: {category}')

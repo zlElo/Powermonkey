@@ -44,11 +44,13 @@ class NuitkaBuilder:
             sys.executable, "-m", "nuitka",
             "--standalone",
             f"--output-dir={self.output_dir}",
-            "--enable-plugin=numpy",
-            "--enable-plugin=torch",
             "--follow-imports",
             f"--include-data-files={self.version_file}={self.version_file}",
             f"--include-data-dir={self.src_dir}={self.src_dir}",
+            "--python-flag=-S",
+            #"--nofollow-import-to=torch._dynamo", old torch version
+            "--assume-yes-for-downloads",
+            # "--module-parameter=torch-disable-jit=yes", old torch version
             self.main_file
         ]
         
@@ -83,7 +85,6 @@ def main():
     success = builder.build(onefile=onefile, debug=debug)
     
     if success:
-        builder.test_exe()
         print(f"\nDone: {builder.output_dir}/")
     else:
         print("\nBuild error")

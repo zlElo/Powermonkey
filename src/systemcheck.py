@@ -1,7 +1,7 @@
 import platform
 import subprocess
 import re
-import torch
+from numba import cuda
 
 def get_cpu_name():
     system = platform.system()
@@ -50,9 +50,12 @@ def get_system():
     return platform.system()
 
 def get_gpu_name():
-    if torch.cuda.is_available():
-        return torch.cuda.get_device_name()
-    return "No CUDA-compatible GPU found"
+    try:
+        if cuda.is_available():
+            return cuda.get_current_device().name
+    except:
+        pass
+    return "CPU only"
 
 def get_python_version():
     return platform.python_version()
