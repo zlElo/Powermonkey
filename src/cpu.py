@@ -40,6 +40,9 @@ def prime_cruncher(n=100000000, logger=None):
 
 def test_cpu(logger):
     score = 0
+    well_perfomance_pi = 2
+    well_perfomance_prime = 50
+    
     gc.disable()
     logger.log('Starting CPU benchmark...')
 
@@ -47,16 +50,17 @@ def test_cpu(logger):
     start_time = time.time()
     approx_pi = calculate_pi_leibniz(10**7)
     end_time = time.time()
-    duration = end_time - start_time
-    score += 200 / duration
-    logger.log(f'Calculated pi approximation: {approx_pi} in {duration:.2f} seconds')
+    duration_pi = end_time - start_time
+    logger.log(f'Calculated pi approximation: {approx_pi} in {duration_pi:.2f} seconds')
 
     # Prime crunching
     start_time = time.time()
     primes = prime_cruncher(25000000, logger)
     end_time = time.time()
-    duration = end_time - start_time
-    score += 200 / duration
-    logger.log(f'Found {primes:,} primes up to 25 million in {duration:.2f} seconds')
+    duration_prime = end_time - start_time
+    logger.log(f'Found {primes:,} primes up to 25 million in {duration_prime:.2f} seconds')
 
+    score = ((well_perfomance_pi / duration_pi) * (well_perfomance_prime / duration_prime)) * 100
+    logger.log(f'CPU benchmark score: {round(score, 1)}')
+    logger.log(f'M2 Baseline: Pi={well_perfomance_pi}s, Prime={well_perfomance_prime}s -> Destination-Score 100')
     return score

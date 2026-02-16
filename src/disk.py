@@ -13,10 +13,14 @@ def test_disk(logger):
     logger.log('Initialised disk test...')
 
     # create a test file
-    with open(f'{path}/test.bench', 'w') as f:
-        size = 1024 * 1024 * 10000 # 10GB
-        f.seek(size - 1)
-        f.write('\0')
+    try:
+        with open(f'{path}/test.bench', 'w') as f:
+            size = 1024 * 1024 * 10000 # 10GB
+            f.seek(size - 1)
+            f.write('\0')
+    except Exception as e:
+        logger.error(f'Error creating test file. That could be a permission problem. - {e}')
+        return 0
 
     # copy test file to destination for testing speed
     start_time = time.time()

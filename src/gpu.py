@@ -18,7 +18,7 @@ def test_gpu(logger):
         except:
             device = "cpu"
             total_mem = 4 * 1024**3
-            logger.log("CUDA detected but failed to init")
+            logger.warning("CUDA detected but failed to init. Falling back to CPU.")
             sync = _no_op_sync
     else:
         device = "cpu"
