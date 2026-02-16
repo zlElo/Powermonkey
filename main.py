@@ -6,6 +6,7 @@ from src.disk import test_disk
 from src.cpu import test_cpu
 from src.gpu import test_gpu
 from src.systemcheck import *
+from time import sleep
 
 # init vars
 logger = powermonkeyLogger('main')
@@ -13,6 +14,24 @@ infos = powermonkey_infos()
 headers = ["Test Device", "Score"]
 
 if __name__ == '__main__':
+    # start tests
+    logger.startup()
+    print(bcolors.OKCYAN + 'Powermonkey - your crossplatform system benchmark tool' + bcolors.ENDC)
+    
+    # wait to accept
+    accepted = input('Do you accept to run the benchmark tests? (y/n): ')
+    if accepted.lower() != 'y':
+        logger.log('Benchmark cancelled by user. Application will be closed in 5 seconds.')
+        sleep(5)
+        exit()
+
+    # wait to confirm that all applications are closed
+    applications_closed = input('Did you close all applications and background tasks? (y/n): ')
+    if applications_closed.lower() != 'y':
+        logger.warning('It is recommended to close all applications and background tasks for more accurate results. Please close them and run the benchmark again. The application will be closed in 5 seconds.')
+        sleep(5)
+        exit()
+    
     # start tests
     logger.log('Starting tests...')
     category = 'a1-cdg'
@@ -23,9 +42,12 @@ if __name__ == '__main__':
     if device == "cpu":
         category = 'a1-cd'
 
+    logger.log('Test completed successfully!')
     logger.break_line()
-    logger.result()
+    #logger.result()
+    #print(bcolors.OKCYAN + 'Powermonkey results for test category: ' + category + bcolors.ENDC)
 
+    logger.scoring(round(score_disk + score_cpu + score_gpu, 1), category)
     # generate results table
     rows = [
         ["Disk", round(score_disk, 1)],
@@ -33,13 +55,12 @@ if __name__ == '__main__':
         ["GPU", round(score_gpu, 1)]
     ]
     table = generate_ascii_table(headers, rows)
-    print(table)
-    logger.scoring(round(score_disk + score_cpu + score_gpu, 1), category)
 
     logger.break_line()
     
     # system informations
-    print(bcolors.OKCYAN + '== Your system informations ==' + bcolors.ENDC)
+    print(bcolors.OKCYAN + 'Your system informations' + bcolors.ENDC)
+    print(table)
     print('CPU: ' + get_cpu_name())
     print('GPU: ' + get_gpu_name())
     print('System/OS: ' + get_system())
